@@ -1,10 +1,10 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Header Styles */
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -25,7 +25,7 @@ body {
 .search-container {
     display: flex;
     align-items: center;
-    margin-left: 20px; /* Space between logo and search bar */
+    margin-left: 20px;
 }
 
 #searchBar {
@@ -39,27 +39,16 @@ body {
     background-color: lightblue;
     border: none;
     cursor: pointer;
-    margin-left: 5px; /* Space between search bar and button */
+    margin-left: 5px;
 }
 
-/* Cart Icon */
 .cart-icon {
     font-size: 24px;
     color: white;
     cursor: pointer;
 }
 
-/* Banner Styles */
-.banner {
-    width: 100%;
-}
-
-.banner img {
-    width: 100%; /* Full width */
-    height: auto; /* Maintain aspect ratio */
-}
-
-/* Buttons for categories */
+/* Category buttons */
 .category-buttons {
     margin: 20px;
     text-align: center;
@@ -73,11 +62,10 @@ body {
     cursor: pointer;
 }
 
-/* Product Styles */
 .renderData {
-    display: grid; /* Changed from flex to grid */
-    grid-template-columns: repeat(3, 1fr); /* Three columns */
-    gap: 20px; /* Space between grid items */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     margin: 20px;
 }
 
@@ -94,7 +82,6 @@ body {
     width: 250px;
 }
 
-/* Cart Styles */
 .renderCartData {
     height: auto;
     margin: 20px;
@@ -103,19 +90,24 @@ body {
     background-color: #f9f9f9;
 }
 
-.cartImgElement {
-    height: 40px;
-    margin: 5px 0;
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.cart-item {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center; /* Center items vertically */
+.cart-item img {
+    height: 50px;
+}
+
+.cart-item p {
+    margin: 0 10px;
+    flex-grow: 1;
 }
 
 .remove-btn {
-    margin-left: 10px;
     padding: 5px 10px;
     background-color: red;
     color: white;
@@ -123,7 +115,6 @@ body {
     cursor: pointer;
 }
 
-/* Footer Styles */
 footer {
     text-align: center;
     padding: 20px;
