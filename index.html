@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="b.css">
+    <title>eCommerce Website</title>
+</head>
+<body>
+    <!-- Header with logo, cart icon, and search bar -->
+    <div class="navbar-container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCVvQ1EpMaLkYitvXRNJIGlDczpEr3F7IXCQ&s" alt="Logo">
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search for products...">
+                <button id="searchBtn">Search</button>
+            </div>
+        </div>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+
+    <!-- Category buttons -->
+    <div class="category-buttons">
+        <button id="jewelryBtn">Jewelry</button>
+        <button id="clothesBtn">Clothes</button>
+    </div>
+
+    <!-- Product display area -->
+    <div class="renderData"></div>
+
+    <!-- Cart display area -->
+    <div class="renderCartData" id="cartSection">
+        <h3>Your Cart</h3>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 eCommerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="c.js"></script>
+</body>
+</html>
