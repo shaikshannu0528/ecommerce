@@ -1,49 +1,89 @@
 let renderData = document.querySelector(".renderData");
 let renderCartData = document.querySelector(".renderCartData");
-
+let availableCategories = [];
+function fetchCategories() {
+    fetch('https://fakestoreapi.com/products/categories')
+        .then(res => res.json())
+        .then(categories => {
+            availableCategories = categories;
+            renderCategoryButtons(categories);
+        });
+}
+function renderCategoryButtons(categories) {
+    const categoryButtonsContainer = document.querySelector(".category-buttons");
+    categoryButtonsContainer.innerHTML = '';  
+    categories.forEach(category => {
+        let categoryButton = document.createElement("button");
+        categoryButton.textContent = category;
+        categoryButton.setAttribute("data-category", category);
+        categoryButton.addEventListener("click", () => {
+            fetchProductsByCategory(category); 
+        });
+        categoryButtonsContainer.appendChild(categoryButton);
+    });
+}
+function fetchProductsByCategory(category) {
+    fetch(https://fakestoreapi.com/products/category/${category})
+        .then(res => res.json())
+        .then(products => {
+            renderProducts(products);
+        });
+}
+function fetchInitialProducts() {
+    const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
+    const promises = categories.map(category => 
+        fetch(https://fakestoreapi.com/products/category/${category})
+            .then(res => res.json())
+    );
+    Promise.all(promises).then(results => {
+        let combinedProducts = [];
+        results.forEach(productArray => {
+            combinedProducts = combinedProducts.concat(productArray.slice(0, 3));  
+        });
+        renderProducts(combinedProducts);  
+    });
+}
 function renderProducts(products) {
     renderData.innerHTML = "";
-    products.forEach((ele) => {
+    products.forEach(product => {
         let productCard = document.createElement("div");
         productCard.setAttribute("class", "product-card");
 
-        let createImgEle = document.createElement("img");
-        createImgEle.setAttribute("src", ele.image);
-        createImgEle.setAttribute("class", "myImages");
+        let productImg = document.createElement("img");
+        productImg.setAttribute("src", product.image);
+        productImg.setAttribute("class", "myImages");
 
-        let createTitle = document.createElement("p");
-        createTitle.textContent = ele.title;
+        let productTitle = document.createElement("p");
+        productTitle.textContent = product.title;
 
-        let createPriceEle = document.createElement("p");
-        createPriceEle.textContent = `$${ele.price}`;
+        let productPrice = document.createElement("p");
+        productPrice.textContent = $${product.price};
 
-        let btnEle = document.createElement("button");
-        btnEle.textContent = "Add to cart";
+        let addToCartBtn = document.createElement("button");
+        addToCartBtn.textContent = "Add to cart";
+        addToCartBtn.addEventListener("click", () => addToCart(product));
 
-        productCard.appendChild(createImgEle);
-        productCard.appendChild(createTitle);
-        productCard.appendChild(createPriceEle);
-        productCard.appendChild(btnEle);
+        productCard.appendChild(productImg);
+        productCard.appendChild(productTitle);
+        productCard.appendChild(productPrice);
+        productCard.appendChild(addToCartBtn);
 
         renderData.appendChild(productCard);
-
-        btnEle.addEventListener("click", () => addTocart(ele.image, ele.title, ele.price));
     });
 }
-
-function addTocart(img, title, price) {
+function addToCart(product) {
     let cartItem = document.createElement("div");
     cartItem.setAttribute("class", "cart-item");
 
-    let cartImgEle = document.createElement("img");
-    cartImgEle.setAttribute("src", img);
-    cartImgEle.setAttribute("class", "cartImgElement");
+    let cartImg = document.createElement("img");
+    cartImg.setAttribute("src", product.image);
+    cartImg.setAttribute("class", "cartImgElement");
 
-    let cartTitleEle = document.createElement("p");
-    cartTitleEle.textContent = title;
+    let cartTitle = document.createElement("p");
+    cartTitle.textContent = product.title;
 
-    let cartPriceEle = document.createElement("p");
-    cartPriceEle.textContent = `$${price}`;
+    let cartPrice = document.createElement("p");
+    cartPrice.textContent = $${product.price};
 
     let removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "remove-btn");
@@ -52,38 +92,17 @@ function addTocart(img, title, price) {
         renderCartData.removeChild(cartItem);
     });
 
-    cartItem.appendChild(cartImgEle);
-    cartItem.appendChild(cartTitleEle);
-    cartItem.appendChild(cartPriceEle);
+    cartItem.appendChild(cartImg);
+    cartItem.appendChild(cartTitle);
+    cartItem.appendChild(cartPrice);
     cartItem.appendChild(removeBtn);
 
     renderCartData.appendChild(cartItem);
 }
-
 document.querySelector(".cart-icon").addEventListener("click", () => {
     document.getElementById("cartSection").scrollIntoView({ behavior: "smooth" });
 });
-
-function fetchJewelry() {
-    fetch('https://fakestoreapi.com/products/category/jewelery')
-        .then(res => res.json())
-        .then(json => {
-            renderProducts(json);
-        });
-}
-
-document.getElementById("jewelryBtn").addEventListener("click", () => {
-    fetchJewelry();  // Fix for switching to jewelry
-});
-
-document.getElementById("clothesBtn").addEventListener("click", () => {
-    fetch("https://fakestoreapi.com/products/category/women's%20clothing")
-        .then(res => res.json())
-        .then(json => {
-            renderProducts(json);
-        });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
-    fetchJewelry();
+    fetchCategories();
+    fetchInitialProducts(); 
 });
