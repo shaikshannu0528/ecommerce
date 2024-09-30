@@ -15,7 +15,7 @@ function renderProducts(products) {
         createTitle.textContent = ele.title;
 
         let createPriceEle = document.createElement("p");
-        createPriceEle.textContent = $${ele.price};
+        createPriceEle.textContent = `$${ele.price}`;
 
         let btnEle = document.createElement("button");
         btnEle.textContent = "Add to cart";
@@ -43,7 +43,7 @@ function addTocart(img, title, price) {
     cartTitleEle.textContent = title;
 
     let cartPriceEle = document.createElement("p");
-    cartPriceEle.textContent = $${price};
+    cartPriceEle.textContent = `$${price}`;
 
     let removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "remove-btn");
